@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Pulp Fiction",
+    "project": "Uber for Choppers",
+    "members": [
+      {
+        "name": "Quentin Tarantino",
+        "id": "98121234567"
+      },
+      {
+        "name": "Samuel L. Jackson",
+        "id": "323K13L25:17"
+      },
+      {
+        "name": "John Travolta",
+        "id": "R0Y4L3W/CH3353"
+      }
+    ]
+  },
+  {
+    "name": "The Pretenders",
+    "project": "Airbnb for Festivals",
+    "members": [
+      {
+        "name": "Chrissie Hynde",
+        "id": "ID123ED"
+      },
+      {
+        "name": "Martin Chambers",
+        "id": "ID31133"
+      }
+    ]
+  },
+  {
+    "name": "Metallica",
+    "project": "Napster",
+    "members": [
+      {
+        "name": "James Hetfield",
+        "id": "L34DS1NG3R"
+      },
+      {
+        "name": "Kirk Hammett",
+        "id": "L34DGU1T4R"
+      },
+      {
+        "name": "Rob Trujillo",
+        "id": "B455"
+      },
+      {
+        "name": "Lars Ulrich",
+        "id": "DRUM5"
+      }
+    ]
+  }
+]
