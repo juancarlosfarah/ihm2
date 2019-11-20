@@ -14,11 +14,32 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
+  state = {
+    groups: [],
+  };
+
+  componentDidMount() {
+    this.fetchGroups().then((groups) => {
+      this.setState({
+        groups,
+      });
+    });
+  }
+
+  fetchGroups = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(data);
+      }, 1000);
+    });
+  };
+
   render() {
+    const { groups } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Header />
-        <Groups groups={data} />
+        <Groups groups={groups} />
       </ThemeProvider>
     );
   }
