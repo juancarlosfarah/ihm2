@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { red, blue } from '@material-ui/core/colors';
-import Groups from './Groups';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Groups from './groups/Groups';
 import data from '../data/groups.json';
 import Header from './Header';
+import ViewGroup from './groups/ViewGroup';
 
 const theme = createMuiTheme({
   palette: {
@@ -37,10 +39,19 @@ class App extends Component {
   render() {
     const { groups } = this.state;
     return (
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Groups groups={groups} />
-      </ThemeProvider>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <Header />
+          <Switch>
+            <Route path="/" exact>
+              <Groups groups={groups} />
+            </Route>
+            <Route path="/groups/:id">
+              <ViewGroup groups={groups} />
+            </Route>
+          </Switch>
+        </ThemeProvider>
+      </Router>
     );
   }
 }

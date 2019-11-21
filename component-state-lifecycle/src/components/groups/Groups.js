@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import Group from './Group';
-import Loader from './common/Loader';
+import Loader from '../common/Loader';
 
 const styles = {
   groups: {
@@ -21,10 +21,11 @@ class Groups extends Component {
         <Grid container spacing={2}>
           {
             groups.map(group => {
-              const { name, project, members } = group;
+              const { id, name, project, members } = group;
               return (
                 <Grid item xs={12} sm={6} key={name}>
                   <Group
+                    id={id}
                     name={name}
                     project={project}
                     members={members}
