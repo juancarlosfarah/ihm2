@@ -6,25 +6,40 @@ class NewMember extends Component {
     root: {
       display: 'flex',
       justifyContent: 'space-around',
-    }
+    },
   };
 
-  state = {
-    name: '',
-    id: '',
+  state = { name: '', id: '' };
+
+  handleChangeName = (event) => {
+    const { target: { value } } = event;
+    this.setState({ name: value });
   };
 
-  handleChangeName = ({ target: { value } }) => {
-    this.setState({
-      name: value,
-    })
+  handleChangeId = (event) => {
+    const { target: { value } } = event;
+    this.setState({ id: value });
   };
 
-  handleChangeId = ({ target: { value } }) => {
-    this.setState({
-      id: value,
-    })
-  };
+  renderTextFields() {
+    const { name, id } = this.state;
+    return [
+      <TextField
+        key="name"
+        label="Name"
+        color="secondary"
+        value={name}
+        onChange={this.handleChangeName}
+      />,
+      <TextField
+        key="id"
+        label="ID"
+        color="secondary"
+        value={id}
+        onChange={this.handleChangeId}
+      />
+    ];
+  }
 
   handleClickClear = () => {
     this.setState({
@@ -34,11 +49,11 @@ class NewMember extends Component {
   };
 
   handleClickAdd = () => {
-    const { currentMembers, setMembers, setExpanded } = this.props;
+    const { currentMembers, setCurrentMembers, setExpanded } = this.props;
     const { name, id } = this.state;
     const newMember = { name, id };
     const newMembers = [ ...currentMembers, newMember ];
-    setMembers(newMembers);
+    setCurrentMembers(newMembers);
     setExpanded(false);
   };
 
@@ -46,25 +61,12 @@ class NewMember extends Component {
     const { classes } = this.props;
     const { name, id } = this.state;
 
-    const addDisabled = !name || !id;
+    const addDisabled = !(name && id);
     const clearDisabled = !name && !id;
 
     return (
-      <div
-        className={classes.root}
-      >
-        <TextField
-          label="Name"
-          color="secondary"
-          value={name}
-          onChange={this.handleChangeName}
-        />
-        <TextField
-          label="ID"
-          color="secondary"
-          value={id}
-          onChange={this.handleChangeId}
-        />
+      <div className={classes.root}>
+        { this.renderTextFields() }
         <Button
           color="secondary"
           variant="outlined"
@@ -74,7 +76,7 @@ class NewMember extends Component {
           Clear
         </Button>
         <Button
-          color="primary"
+          color="secondary"
           variant="contained"
           disabled={addDisabled}
           onClick={this.handleClickAdd}
@@ -86,6 +88,4 @@ class NewMember extends Component {
   }
 }
 
-const StyledComponent = withStyles(NewMember.styles)(NewMember);
-
-export default StyledComponent;
+export default withStyles(NewMember.styles)(NewMember);

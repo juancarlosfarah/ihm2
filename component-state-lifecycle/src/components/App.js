@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { red, blue } from '@material-ui/core/colors';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Groups from './groups/Groups';
+import Groups from './Groups';
 import data from '../data/groups.json';
 import Header from './Header';
-import ViewGroup from './groups/ViewGroup';
+import ViewGroup from './ViewGroup';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,8 +16,14 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  state = {
-    groups: [],
+  state = { groups: [] };
+
+  fetchGroups = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(data);
+      }, 1000);
+    });
   };
 
   componentDidMount() {
@@ -28,18 +34,10 @@ class App extends Component {
     });
   }
 
-  fetchGroups = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(data);
-      }, 1000);
-    });
-  };
-
   render() {
     const { groups } = this.state;
     return (
-      <Router>
+      <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Header />
           <Switch>
@@ -51,7 +49,7 @@ class App extends Component {
             </Route>
           </Switch>
         </ThemeProvider>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

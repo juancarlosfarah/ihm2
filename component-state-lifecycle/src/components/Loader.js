@@ -5,8 +5,8 @@ const useStyles = makeStyles(theme => ({
   loader: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(5),
+  },
 }));
 
 const Loader = () => {

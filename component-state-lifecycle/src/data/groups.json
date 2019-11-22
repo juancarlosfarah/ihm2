@@ -55,5 +55,11 @@
         "id": "DRUM5"
       }
     ]
+  },
+  {
+    "id": "4",
+    "name": "New Group",
+    "project": "New Project",
+    "members": []
   }
 ]

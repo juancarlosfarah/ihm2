@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import Group from './Group';
-import Loader from '../common/Loader';
+import Loader from './Loader';
 
 const styles = {
   groups: {
-    overflowX: 'hidden',
-  },
+    overflow: 'hidden',
+  }
 };
 
-class Groups extends Component {
+class Groups extends React.Component {
   render() {
     const { groups, classes } = this.props;
 
     if (!groups.length) {
-      return (<Loader />);
+      return <Loader />;
     }
+
     return (
       <div className={classes.groups}>
         <Grid container spacing={2}>
@@ -23,7 +24,7 @@ class Groups extends Component {
             groups.map(group => {
               const { id, name, project, members } = group;
               return (
-                <Grid item xs={12} sm={6} key={name}>
+                <Grid item xs={12} lg={6} key={name}>
                   <Group
                     id={id}
                     name={name}

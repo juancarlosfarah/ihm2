@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Paper, Typography, makeStyles } from '@material-ui/core';
-import Members from '../Members';
+import Members from './Members';
 
 const useStyles = makeStyles(theme => ({
   group: {
@@ -14,27 +14,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Group = ({ id, name, project, members }) => {
+  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-  const classes = useStyles();
-  const newPathname = `/groups/${id}`;
-  const active = newPathname === location.pathname;
+  const groupPathname = `/groups/${id}`;
+
+  const active = groupPathname === location.pathname;
 
   const handleClick = () => {
     if (!active) {
-      history.push(newPathname);
+      history.push(groupPathname);
     }
   };
 
   return (
-    <Paper
-      className={classes.group}
-    >
+    <Paper className={classes.group}>
       <Typography
         variant="h6"
         color="primary"
-        className={active ? '' : classes.clickableName}
         onClick={handleClick}
+        className={!active ? classes.clickableName : ''}
       >
         { name }
       </Typography>

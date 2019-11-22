@@ -3,26 +3,31 @@ import { List, IconButton } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import Member from './Member';
 import NewMember from './NewMember';
-import Loader from './common/Loader';
+import Loader from './Loader';
 
 const Members = ({ members }) => {
   const [expanded, setExpanded] = useState(false);
-  const [currentMembers, setCurrentMembers] = useState([]);
+  const [currentMembers, setCurrentMembers] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setCurrentMembers(members)
-    }, 1000);
+    const fetchMembers = () => new Promise(resolve => {
+      setTimeout(() => {
+        resolve(members);
+      }, 1000);
+    });
+    fetchMembers().then(members => setCurrentMembers(members));
   }, [members]);
 
+  if (!currentMembers) {
+    return <Loader />;
+  }
+
   if (!currentMembers.length) {
-    return (
-      <Loader />
-    )
+    return 'No Members';
   }
 
   return (
-    <>
+    <div>
       <List>
         {
           currentMembers.map(member => {
@@ -40,14 +45,17 @@ const Members = ({ members }) => {
       <IconButton
         onClick={() => setExpanded(!expanded)}
       >
-        {
-          expanded ?
-            <ExpandLess /> :
-            <ExpandMore />
-        }
+        { expanded ? <ExpandLess /> : <ExpandMore /> }
       </IconButton>
-      { expanded && <NewMember currentMembers={currentMembers} setMembers={setCurrentMembers} setExpanded={setExpanded}/> }
-    </>
+      {
+        expanded &&
+        <NewMember
+          currentMembers={currentMembers}
+          setCurrentMembers={setCurrentMembers}
+          setExpanded={setExpanded}
+        />
+      }
+    </div>
   );
 };
 
